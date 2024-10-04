@@ -2,7 +2,7 @@ import pygame
 import sys
 import time
 import random
-
+#
 pygame.init()
 size = width, height = 600, 400
 #
