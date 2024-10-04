@@ -5,7 +5,7 @@ This program provides an opportunity using the pretty user interface to play in 
 # Version 1.0
 
 The Fifteen Puzzle Game Version 1.0 provides the user interface and the Manual mode of the game. 
-When the game is started, the interface shows the finished matrix. We can shuffle the matrix using the "Shuffle" button. Then, tiles can be moved by mouse-clicking on the tile near the empty cell.
+When the game is started, the interface shows the finished board. We can shuffle the board using the "Shuffle" button. Then, tiles can be moved by mouse-clicking on the tile near the empty cell.
 
 # For Use
 

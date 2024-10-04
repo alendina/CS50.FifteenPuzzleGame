@@ -19,7 +19,7 @@ smallFont = pygame.font.Font("MarkerFelt.ttc", 20)
 moveFont = pygame.font.Font("OpenSans-Regular.ttf", 50)
 
 
-board_finish = [
+FINISH_BOARD = [
     [1, 2, 3, 4],
     [5, 6, 7, 8],
     [9, 10, 11, 12],
@@ -27,7 +27,7 @@ board_finish = [
 ]
 
 # start the game with the finish board    
-board = board_finish
+board = FINISH_BOARD
 focus_tile = (3, 3)
 
 
@@ -64,7 +64,7 @@ def move_tile(board, tile):
     #focus_tile = tile
     return board
 
-def shaffle_board(board):
+def shuffle_board(board):
     while True:
         for i in range(4):
             for j in range(4):
@@ -83,10 +83,17 @@ def shaffle_board(board):
             moves.append((i, j + 1))
         move = random.choice(moves)
         board[i][j], board[move[0]][move[1]] = board[move[0]][move[1]], board[i][j]
-        if board == board_finish:
+        if board == FINISH_BOARD:
             break
     return board
 
+def show_solve(solve):
+    for move in solve:
+        board = move_tile(board, move)
+        time.sleep(0.5)
+        screen.blit(title, titleRect)
+        pygame.display.flip()
+    return board
 
 while True:
 
@@ -102,13 +109,21 @@ while True:
     titleRect.center = ((width / 2), 30)
     screen.blit(title, titleRect)
 
-    # Draw Shaffle buttons
-    shaffleButton = pygame.Rect((width - 80), (height - 60), 40 , 25)
-    shaffle = smallFont.render("Shaffle", True, FONT_COLOR, BG_COLOR)
-    shaffleRect = shaffle.get_rect()
-    shaffleRect.center = shaffleButton.center
-    pygame.draw.rect(screen, TABLE_COLOR, shaffleButton)
-    screen.blit(shaffle, shaffleRect)
+    # Draw shuffle button
+    shuffleButton = pygame.Rect((width - 80), (height - 60), 40 , 25)
+    shuffle = smallFont.render("Shuffle", True, FONT_COLOR, BG_COLOR)
+    shuffleRect = shuffle.get_rect()
+    shuffleRect.center = shuffleButton.center
+    pygame.draw.rect(screen, TABLE_COLOR, shuffleButton)
+    screen.blit(shuffle, shuffleRect)
+
+    # Draw AI button
+    aiButton = pygame.Rect(40, (height - 60), 40 , 25)
+    ai = smallFont.render("use AI", True, FONT_COLOR, BG_COLOR)
+    aiRect = ai.get_rect()
+    aiRect.center = aiButton.center
+    pygame.draw.rect(screen, TABLE_COLOR, aiButton)
+    screen.blit(ai, aiRect)
     
 
     # Draw game board
@@ -151,9 +166,12 @@ while True:
     click, _, _ = pygame.mouse.get_pressed()
     if click == 1:
         mouse = pygame.mouse.get_pos()
-        if shaffleButton.collidepoint(mouse):
-            print("shaffle")
+        if shuffleButton.collidepoint(mouse):
+            print("shuffle")
             board = randomize_board()
+        elif aiButton.collidepoint(mouse):
+            print("AI")
+            board = show_solve(solve_board(board))
         else:
             for i in range(4):
                 for j in range(4):
