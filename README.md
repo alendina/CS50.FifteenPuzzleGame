@@ -2,6 +2,8 @@
 
 This program provides an opportunity using the pretty user interface to play in a classic Fifteen Puzzle game. There are two play modes: manual mode and AI mode (AI mode uses BFS - Broad-Ferst-Search method).
 
+<img width="600" alt="image" src="https://github.com/alendina/CS50.FifteenPuzzleGame/blob/main/Fifteen_puzzle_game.png" />
+
 # Version 1.0
 
 The Fifteen Puzzle Game Version 1.0 provides the user interface and the Manual mode of the game. 
